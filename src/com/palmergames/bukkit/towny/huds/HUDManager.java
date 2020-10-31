@@ -33,9 +33,12 @@ public class HUDManager implements Listener{
 	//**TOGGLES**//
 	public void toggleWarHUD (Player p) {
 		if (!warUsers.contains(p)){
-			toggleAllOff(p);
-			warUsers.add(p);
-			WarHUD.toggleOn(p, TownyUniverse.getInstance().getWarEvent());
+			War war = TownyUniverse.getInstance().getWarEvent(p);
+			if (war != null) {
+				toggleAllOff(p);
+				warUsers.add(p);
+				WarHUD.toggleOn(p, war);
+			}
 		} else 
 			toggleAllOff(p);
 	}
@@ -51,9 +54,10 @@ public class HUDManager implements Listener{
 
 	public void toggleAllWarHUD (War war) {
 		for (Player p : warUsers)
-			if (TownyUniverse.getInstance().getWarEvent(p).equals(war))
+			if (TownyUniverse.getInstance().getWarEvent(p).equals(war)) {
 				toggleOff(p);
-		warUsers.clear();
+				warUsers.remove(p);
+			}
 	}
 
 	public void toggleAllOff (Player p) {
