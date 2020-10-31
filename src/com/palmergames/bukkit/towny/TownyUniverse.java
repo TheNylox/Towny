@@ -623,7 +623,7 @@ public class TownyUniverse {
     
     public void endWarEvent() {
         if (warEvent != null && warEvent.isWarTime()) {
-            warEvent.end();
+            warEvent.end(true);
         }
     }	
 
@@ -708,6 +708,7 @@ public class TownyUniverse {
     }
     
     public void removeWar(War war) {
+    	war = null;
     	wars.remove(war);
     }
     
